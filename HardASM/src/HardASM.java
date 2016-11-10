@@ -12,11 +12,11 @@ public class HardASM {
 
     public static void main(String args[]){
 
-        String path = PathUtils.getProgramPath();
+ //       String path = PathUtils.getProgramPath();
 
         List<String> lines = HASMLoader.loadHASMSourceFile("D:\\me\\8892\\Hard\\HardScript\\HardASM\\out\\production\\HardASM\\test_0.xasm");
         for (int i = 0; i < lines.size(); i++){
-            Log.d(TAG, "line " + i);
+            Log.d(TAG, "line " + i + ": " + lines.get(i));
             try {
                 List<Token> tokens = Lexer.getLineTokens(lines.get(i));
                 for (int j = 0; j < tokens.size(); j++){

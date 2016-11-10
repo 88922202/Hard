@@ -35,14 +35,32 @@ public class Lexer {
             if (currentChar >= 48 && currentChar <= 57){
                 if (CURRENT_LEX_STATE == LEX_STATE_NOMAL){
                     CURRENT_LEX_STATE = LEX_STATE_IN_INT;
-                }else {
-                    throw new IllegalTokenException();
+                }else if (CURRENT_LEX_STATE == LEX_STATE_IN_STRING){
+
+                }else if (CURRENT_LEX_STATE == LEX_STATE_IN_REVERT){
+                    CURRENT_LEX_STATE = LEX_STATE_IN_STRING;
+                }else if (CURRENT_LEX_STATE == LEX_STATE_IN_INT){
+
+                }else if (CURRENT_LEX_STATE == LEX_STATE_IN_FLOAT){
+
+                }else if (CURRENT_LEX_STATE == LEX_STATE_IN_INDENTFIER){
+
+                }
+                else {
+                    throw new IllegalTokenException("error char " + currentChar);
                 }
             }else if (currentChar >= 65 && currentChar <= 122){
                 if (CURRENT_LEX_STATE == LEX_STATE_NOMAL){
                     CURRENT_LEX_STATE = LEX_STATE_IN_INDENTFIER;
-                }else {
-                    throw new IllegalTokenException();
+                }else if (CURRENT_LEX_STATE == LEX_STATE_IN_STRING){
+
+                }else if (CURRENT_LEX_STATE == LEX_STATE_IN_REVERT){
+                    CURRENT_LEX_STATE = LEX_STATE_IN_STRING;
+                }else if (CURRENT_LEX_STATE == LEX_STATE_IN_INDENTFIER){
+
+                }
+                else {
+                    throw new IllegalTokenException("error char " + currentChar);
                 }
             }else {
 
@@ -106,13 +124,41 @@ public class Lexer {
                             throw new IllegalTokenException();
                         }
                     }
-                    //break;
+                    case '\t':{
+                        if (CURRENT_LEX_STATE == LEX_STATE_NOMAL){
+
+                        }else if (CURRENT_LEX_STATE == LEX_STATE_IN_STRING){
+
+                        }else if (CURRENT_LEX_STATE == LEX_STATE_IN_INT){
+
+                        }else if (CURRENT_LEX_STATE == LEX_STATE_IN_FLOAT){
+
+                        }
+                        else if (CURRENT_LEX_STATE == LEX_STATE_IN_INDENTFIER){
+                            CURRENT_LEX_STATE = LEX_STATE_NOMAL;
+                        }else {
+                            throw new IllegalTokenException("error char " + currentChar);
+                        }
+                    }
+                    break;
                     case ',': {
                         if (CURRENT_LEX_STATE == LEX_STATE_NOMAL) {
                             Token token = new Token(Token.TOKEN_TYPE_COMMA, ",");
                             tokens.add(token);
-                        } else {
-                            throw new IllegalTokenException();
+                        }else if (CURRENT_LEX_STATE == LEX_STATE_IN_STRING){
+
+                        }else if (CURRENT_LEX_STATE == LEX_STATE_IN_REVERT){
+                            CURRENT_LEX_STATE = LEX_STATE_IN_STRING;
+                        }else if (CURRENT_LEX_STATE == LEX_STATE_IN_INT){
+                            CURRENT_LEX_STATE = LEX_STATE_NOMAL;
+                        }else if (CURRENT_LEX_STATE == LEX_STATE_IN_FLOAT){
+                            CURRENT_LEX_STATE = LEX_STATE_NOMAL;
+                        }
+                        else if (CURRENT_LEX_STATE == LEX_STATE_IN_INDENTFIER){
+                            CURRENT_LEX_STATE = LEX_STATE_NOMAL;
+                        }
+                        else {
+                            throw new IllegalTokenException("error char " + currentChar);
                         }
                     }
                     break;
@@ -153,7 +199,9 @@ public class Lexer {
                     }
                     break;
                     case '}': {
-                        if (CURRENT_LEX_STATE == LEX_STATE_IN_STRING) {
+                        if (CURRENT_LEX_STATE == LEX_STATE_NOMAL){
+
+                        } else if (CURRENT_LEX_STATE == LEX_STATE_IN_STRING) {
 
                         } else if (CURRENT_LEX_STATE == LEX_STATE_IN_REVERT) {
                             CURRENT_LEX_STATE = LEX_STATE_IN_STRING;
@@ -166,7 +214,9 @@ public class Lexer {
 
                     break;
                     case ' ': {
-                        if (CURRENT_LEX_STATE == LEX_STATE_IN_INDENTFIER) {
+                        if (CURRENT_LEX_STATE == LEX_STATE_NOMAL){
+
+                        } else if (CURRENT_LEX_STATE == LEX_STATE_IN_INDENTFIER) {
                             CURRENT_LEX_STATE = LEX_STATE_NOMAL;
                         } else if (CURRENT_LEX_STATE == LEX_STATE_IN_INT) {
                             CURRENT_LEX_STATE = LEX_STATE_NOMAL;
@@ -177,12 +227,14 @@ public class Lexer {
                         } else if (CURRENT_LEX_STATE == LEX_STATE_IN_REVERT) {
                             CURRENT_LEX_STATE = LEX_STATE_IN_STRING;
                         } else {
-                            throw new IllegalTokenException();
+                            throw new IllegalTokenException("error char " + currentChar);
                         }
                     }
                     break;
+                    case ':':
+                        break;
                     default:
-                        throw new IllegalTokenException();
+                        throw new IllegalTokenException("error char " + currentChar);
 
                 }
             }
