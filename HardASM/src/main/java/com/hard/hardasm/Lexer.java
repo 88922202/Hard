@@ -221,6 +221,10 @@ public class Lexer {
                         } else if (CURRENT_LEX_STATE == LEX_STATE_IN_INDENTFIER) {
                             CURRENT_LEX_STATE = LEX_STATE_NOMAL;
                         } else if (CURRENT_LEX_STATE == LEX_STATE_IN_INT) {
+                            String sub = line.substring(parseStartIndex, i);
+                            Token token = new Token(Token.TOKEN_TYPE_INT, sub);
+                            tokens.add(token);
+                            parseStartIndex = i;
                             CURRENT_LEX_STATE = LEX_STATE_NOMAL;
                         } else if (CURRENT_LEX_STATE == LEX_STATE_IN_FLOAT) {
                             CURRENT_LEX_STATE = LEX_STATE_NOMAL;
