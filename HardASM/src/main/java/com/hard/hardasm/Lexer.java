@@ -1,4 +1,4 @@
-import org.omg.CORBA.NO_IMPLEMENT;
+package main.java.com.hard.hardasm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,36 +34,38 @@ public class Lexer {
             Log.d(TAG, "char is " + currentChar + " at " + i + ", lexer state is " + CURRENT_LEX_STATE);
             if (currentChar >= 48 && currentChar <= 57){
                 if (CURRENT_LEX_STATE == LEX_STATE_NOMAL){
+                    parseStartIndex = i;
                     CURRENT_LEX_STATE = LEX_STATE_IN_INT;
                 }else if (CURRENT_LEX_STATE == LEX_STATE_IN_STRING){
-
+                    //do nothing
                 }else if (CURRENT_LEX_STATE == LEX_STATE_IN_REVERT){
                     CURRENT_LEX_STATE = LEX_STATE_IN_STRING;
                 }else if (CURRENT_LEX_STATE == LEX_STATE_IN_INT){
-
+                    //TODO
+                    //TODO
                 }else if (CURRENT_LEX_STATE == LEX_STATE_IN_FLOAT){
-
+                    //TODO
                 }else if (CURRENT_LEX_STATE == LEX_STATE_IN_INDENTFIER){
-
+                    //do nothing
                 }
                 else {
                     throw new IllegalTokenException("error char " + currentChar);
                 }
             }else if (currentChar >= 65 && currentChar <= 122){
                 if (CURRENT_LEX_STATE == LEX_STATE_NOMAL){
+                    parseStartIndex = i;
                     CURRENT_LEX_STATE = LEX_STATE_IN_INDENTFIER;
                 }else if (CURRENT_LEX_STATE == LEX_STATE_IN_STRING){
-
+                    //do nothing
                 }else if (CURRENT_LEX_STATE == LEX_STATE_IN_REVERT){
                     CURRENT_LEX_STATE = LEX_STATE_IN_STRING;
                 }else if (CURRENT_LEX_STATE == LEX_STATE_IN_INDENTFIER){
-
+                    //do nothing
                 }
                 else {
                     throw new IllegalTokenException("error char " + currentChar);
                 }
             }else {
-
                 switch (currentChar) {
                     case '"': {
                         if (CURRENT_LEX_STATE == LEX_STATE_NOMAL) {

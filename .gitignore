@@ -1,2 +1,4 @@
 /HardASM/.idea
 /HardASM/out
+/HardASM/build
+/HardASM/*.iml

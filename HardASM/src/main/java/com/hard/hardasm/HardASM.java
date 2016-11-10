@@ -1,6 +1,9 @@
+package main.java.com.hard.hardasm;
 
-import java.util.ArrayList;
+
 import java.util.List;
+
+
 
 /**
  * <h3></h3>
@@ -14,7 +17,7 @@ public class HardASM {
 
  //       String path = PathUtils.getProgramPath();
 
-        List<String> lines = HASMLoader.loadHASMSourceFile("D:\\me\\8892\\Hard\\HardScript\\HardASM\\out\\production\\HardASM\\test_0.xasm");
+        List<String> lines = HASMLoader.loadHASMSourceFile("D:\\me\\8892\\Hard\\HardScript\\HardASM\\build\\production\\HardASM\\main\\java\\com\\hard\\hardasm\\test_0.xasm");
         for (int i = 0; i < lines.size(); i++){
             Log.d(TAG, "line " + i + ": " + lines.get(i));
             try {

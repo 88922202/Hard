@@ -1,4 +1,5 @@
-import com.sun.istack.internal.Nullable;
+package main.java.com.hard.hardasm;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -35,7 +36,7 @@ public class Log {
     }
 
     private static Logger getLogger(){
-        PropertyConfigurator.configure("D:\\me\\8892\\Hard\\HardScript\\HardASM\\out\\production\\HardASM\\log4j.properties");//加载.properties文件
+        PropertyConfigurator.configure("D:\\me\\8892\\Hard\\HardScript\\HardASM\\build\\production\\HardASM\\main\\java\\com\\hard\\hardasm\\log4j.properties");
         return Logger.getLogger(Log.class);
     }
 }
