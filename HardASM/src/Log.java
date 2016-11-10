@@ -1,6 +1,6 @@
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
+import com.sun.istack.internal.Nullable;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  * <h3></h3>
@@ -8,32 +8,34 @@ import org.apache.log4j.Logger;
  */
 public class Log {
 
-    public static void setLevel(String level){
-        Level.toLevel(level);
+    private static Logger INSTANCE = getLogger();
+
+    private Log(){
+
     }
 
-    public static void d(Class clazz, String message){
-        getLogger(clazz).debug(message);
+    public static void d(String tag, String message){
+        INSTANCE.debug(tag + ": " + message);
     }
 
-    public static void i(Class clazz, String message){
-        getLogger(clazz).info(message);
+    public static void i(String tag, String message){
+        INSTANCE.info(tag + ": " + message);
     }
 
-    public static void w(Class clazz, String message){
-        getLogger(clazz).warn(message);
+    public static void w(String tag, String message){
+        INSTANCE.warn(tag + ": " + message);
     }
 
-    public static void e(Class clazz, String message){
-        getLogger(clazz).error(message);
+    public static void e(String tag, String message){
+        INSTANCE.error(tag + ": " + message);
     }
 
-    public static void f(Class clazz, String message){
-        getLogger(clazz).fatal(message);
+    public static void f(String tag, String message){
+        INSTANCE.fatal(tag + ": " + message);
     }
 
-    private static Logger getLogger(Class clazz){
-        BasicConfigurator.configure();
-        return Logger.getLogger(clazz);
+    private static Logger getLogger(){
+        PropertyConfigurator.configure("D:\\me\\8892\\Hard\\HardScript\\HardASM\\out\\production\\HardASM\\log4j.properties");//加载.properties文件
+        return Logger.getLogger(Log.class);
     }
 }

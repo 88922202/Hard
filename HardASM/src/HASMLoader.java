@@ -17,14 +17,14 @@ public class HASMLoader {
     public static List<String> loadHASMSourceFile(String fileName){
 
         if (TextUtils.isEmpty(fileName)){
-            Log.w(HASMLoader.class, TAG + "fileName is empty.");
+            Log.w(TAG, "fileName is empty.");
             return null;
         }
 
-        Log.d(HASMLoader.class, "load file " + fileName);
+        Log.d(TAG, "load file " + fileName);
 
         if (!fileName.endsWith(".xasm")){
-            Log.d(HASMLoader.class, TAG + "fileName is not end with .xasm, auto fix this.");
+            Log.d(TAG, "fileName is not end with .xasm, auto fix this.");
             fileName += ".xasm";
         }
 
@@ -44,10 +44,10 @@ public class HASMLoader {
 
             bufferedReader.close();
             fileReader.close();
-            Log.d(HASMLoader.class, TAG + fileName + "loaded.");
+            Log.d(TAG, fileName + " loaded.");
         }catch (IOException e){
             e.printStackTrace();
-            Log.e(HASMLoader.class, TAG + "read file" + fileName + "failed.");
+            Log.e(TAG, "read file " + fileName + " failed.");
         }
 
         return lines;
