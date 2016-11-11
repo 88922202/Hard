@@ -1,11 +1,4 @@
-package main.java.com.hard.hardasm;
-
-
-import main.java.com.hard.hardasm.exception.IllegalCharException;
-import main.java.com.hard.hardasm.exception.IllegalTokenException;
-
-import java.util.List;
-
+package com.hard.hardasm;
 
 
 /**

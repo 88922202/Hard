@@ -1,4 +1,4 @@
-package main.java.com.hard.hardasm;
+package com.hard.hardasm;
 
 import java.util.HashMap;
 import java.util.Map;

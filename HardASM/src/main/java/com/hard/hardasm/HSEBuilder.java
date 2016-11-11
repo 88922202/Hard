@@ -1,6 +1,7 @@
-package main.java.com.hard.hardasm;
+package com.hard.hardasm;
 
-import main.java.com.hard.hardasm.utils.FileUtils;
+
+import com.hard.hardutils.FileUtils;
 
 import java.util.List;
 

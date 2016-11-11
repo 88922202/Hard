@@ -1,4 +1,4 @@
-package main.java.com.hard.hardasm.exception;
+package com.hard.hardasm.exception;
 
 /**
  * <h3></h3>

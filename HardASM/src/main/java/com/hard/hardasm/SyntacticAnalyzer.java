@@ -1,6 +1,7 @@
-package main.java.com.hard.hardasm;
+package com.hard.hardasm;
 
-import main.java.com.hard.hardasm.exception.IllegalTokenException;
+import com.hard.hardasm.exception.IllegalTokenException;
+import com.hard.hardutils.Log;
 
 import java.util.ArrayList;
 import java.util.List;
