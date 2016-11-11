@@ -2,3 +2,9 @@
 /HardASM/out
 /HardASM/build
 /HardASM/*.iml
+/HardUtils/build
+/HardUtils/.gradle
+/HardUtils/.idea
+/HardVM/.idea
+/HardVM/.gradle
+/HardVM/build
