@@ -21,9 +21,9 @@ public class HardASM {
         for (int i = 0; i < lines.size(); i++){
             Log.d(TAG, "line " + i + ": " + lines.get(i));
             try {
-                List<Token> tokens = Lexer.getLineTokens(lines.get(i));
+                List<Token> tokens = Lexer2.getLineTokens(lines.get(i));
                 for (int j = 0; j < tokens.size(); j++){
-                    Log.d(TAG, "token is " + tokens.get(i).getValue());
+                    Log.d(TAG, "token is " + tokens.get(j).getValue());
                 }
             }catch (IllegalTokenException e){
                 e.printStackTrace();

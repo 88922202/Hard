@@ -35,7 +35,7 @@ public class HASMLoader {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line = bufferedReader.readLine();
             while (line != null){
-                line = line.trim();
+                line = line.trim() + '\n';
                 if (!line.equals("")) {
                     lines.add(line);
                 }
