@@ -2,6 +2,7 @@ package main.java.com.hard.hardasm;
 
 import main.java.com.hard.hardasm.exception.IllegalTokenException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +13,8 @@ public class SyntacticAnalyzer {
 
     private static final String TAG = "SyntacticAnalyzer";
 
-    public static void analysis(List<Token> tokens) throws IllegalTokenException {
+    public static List<Integer> analysis(List<Token> tokens) throws IllegalTokenException {
+        List<Integer> codes = new ArrayList<>();
         for (int i = 0; i < tokens.size(); i++){
             Token currentToken = tokens.get(i);
             String currentValue = currentToken.getValue() == null ? "" : currentToken.getValue().toUpperCase();
@@ -27,6 +29,7 @@ public class SyntacticAnalyzer {
                                 if (next2TokenType == Token.TOKEN_TYPE_INT){
                                     int code = Instruction.getInstructionCode(Instruction.ADD);
                                     //i = skipParsedTokens(i, 2);
+                                    codes.add(code);
                                     Log.d(TAG, "instruction code is " + code);
                                 }else {
                                     throw new IllegalTokenException("error token " + next2TokenType);
@@ -42,6 +45,7 @@ public class SyntacticAnalyzer {
                 case Token.TOKEN_TYPE_INT:
                     try {
                         int number = Integer.parseInt(currentValue);
+                        codes.add(number);
                         Log.d(TAG, "int number " + number);
                     }catch (Exception e){
                         throw new IllegalTokenException("error token " + currentToken.getValue());
@@ -52,6 +56,8 @@ public class SyntacticAnalyzer {
                     break;
             }
         }
+
+        return codes;
     }
 
     private static int getNextTokenType(List<Token> tokens, int index){
