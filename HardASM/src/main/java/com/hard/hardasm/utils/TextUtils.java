@@ -1,4 +1,4 @@
-package main.java.com.hard.hardasm;
+package main.java.com.hard.hardasm.utils;
 
 /**
  * <h3></h3>

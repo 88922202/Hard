@@ -1,5 +1,7 @@
 package main.java.com.hard.hardasm;
 
+import main.java.com.hard.hardasm.exception.IllegalCharException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class Lexer {
 
     private static int CURRENT_LEX_STATE;
 
-    public static List<Token> getLineTokens(String line) throws IllegalTokenException{
+    public static List<Token> getLineTokens(String line) throws IllegalCharException {
         CURRENT_LEX_STATE = 0;
         List<Token> tokens = new ArrayList<>();
         int parseStartIndex = 0;
@@ -49,7 +51,7 @@ public class Lexer {
                     //do nothing
                 }
                 else {
-                    throw new IllegalTokenException("error char " + currentChar);
+                    throw new IllegalCharException("error char " + currentChar);
                 }
             }else if (currentChar >= 65 && currentChar <= 122){
                 if (CURRENT_LEX_STATE == LEX_STATE_NOMAL){
@@ -63,7 +65,7 @@ public class Lexer {
                     //do nothing
                 }
                 else {
-                    throw new IllegalTokenException("error char " + currentChar);
+                    throw new IllegalCharException("error char " + currentChar);
                 }
             }else {
                 switch (currentChar) {
@@ -80,7 +82,7 @@ public class Lexer {
                         } else if (CURRENT_LEX_STATE == LEX_STATE_IN_REVERT) {
                             CURRENT_LEX_STATE = LEX_STATE_IN_STRING;
                         } else {
-                            throw new IllegalTokenException();
+                            throw new IllegalCharException();
                         }
                     }
                     break;
@@ -90,7 +92,7 @@ public class Lexer {
                         } else if (CURRENT_LEX_STATE == LEX_STATE_IN_REVERT) {
                             CURRENT_LEX_STATE = LEX_STATE_IN_STRING;
                         } else {
-                            throw new IllegalTokenException();
+                            throw new IllegalCharException();
                         }
                     }
                     break;
@@ -115,7 +117,7 @@ public class Lexer {
                         } else if (CURRENT_LEX_STATE == LEX_STATE_IN_REVERT) {
                             CURRENT_LEX_STATE = LEX_STATE_IN_STRING;
                         } else {
-                            throw new IllegalTokenException();
+                            throw new IllegalCharException();
                         }
                     }
                     break;
@@ -123,7 +125,7 @@ public class Lexer {
                         if (CURRENT_LEX_STATE == LEX_STATE_NOMAL) {
                             return tokens;
                         } else {
-                            throw new IllegalTokenException();
+                            throw new IllegalCharException();
                         }
                     }
                     case '\t':{
@@ -139,7 +141,7 @@ public class Lexer {
                         else if (CURRENT_LEX_STATE == LEX_STATE_IN_INDENTFIER){
                             CURRENT_LEX_STATE = LEX_STATE_NOMAL;
                         }else {
-                            throw new IllegalTokenException("error char " + currentChar);
+                            throw new IllegalCharException("error char " + currentChar);
                         }
                     }
                     break;
@@ -160,7 +162,7 @@ public class Lexer {
                             CURRENT_LEX_STATE = LEX_STATE_NOMAL;
                         }
                         else {
-                            throw new IllegalTokenException("error char " + currentChar);
+                            throw new IllegalCharException("error char " + currentChar);
                         }
                     }
                     break;
@@ -172,7 +174,7 @@ public class Lexer {
                         } else if (CURRENT_LEX_STATE == LEX_STATE_IN_REVERT) {
                             CURRENT_LEX_STATE = LEX_STATE_IN_STRING;
                         } else {
-                            throw new IllegalTokenException();
+                            throw new IllegalCharException();
                         }
                     }
                     break;
@@ -184,7 +186,7 @@ public class Lexer {
                         } else if (CURRENT_LEX_STATE == LEX_STATE_IN_REVERT) {
                             CURRENT_LEX_STATE = LEX_STATE_IN_STRING;
                         } else {
-                            throw new IllegalTokenException();
+                            throw new IllegalCharException();
                         }
                     }
                     break;
@@ -196,7 +198,7 @@ public class Lexer {
                         } else if (CURRENT_LEX_STATE == LEX_STATE_IN_REVERT) {
                             CURRENT_LEX_STATE = LEX_STATE_IN_STRING;
                         } else {
-                            throw new IllegalTokenException();
+                            throw new IllegalCharException();
                         }
                     }
                     break;
@@ -210,7 +212,7 @@ public class Lexer {
                         } else if (CURRENT_LEX_STATE == LEX_STATE_IN_FUNCTION) {
 
                         } else {
-                            throw new IllegalTokenException();
+                            throw new IllegalCharException();
                         }
                     }
 
@@ -233,14 +235,14 @@ public class Lexer {
                         } else if (CURRENT_LEX_STATE == LEX_STATE_IN_REVERT) {
                             CURRENT_LEX_STATE = LEX_STATE_IN_STRING;
                         } else {
-                            throw new IllegalTokenException("error char " + currentChar);
+                            throw new IllegalCharException("error char " + currentChar);
                         }
                     }
                     break;
                     case ':':
                         break;
                     default:
-                        throw new IllegalTokenException("error char " + currentChar);
+                        throw new IllegalCharException("error char " + currentChar);
 
                 }
             }

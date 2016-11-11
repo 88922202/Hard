@@ -1,6 +1,9 @@
 package main.java.com.hard.hardasm;
 
 
+import main.java.com.hard.hardasm.exception.IllegalCharException;
+import main.java.com.hard.hardasm.exception.IllegalTokenException;
+
 import java.util.List;
 
 
@@ -25,7 +28,8 @@ public class HardASM {
                 for (int j = 0; j < tokens.size(); j++){
                     Log.d(TAG, "token is " + tokens.get(j).getValue());
                 }
-            }catch (IllegalTokenException e){
+                SyntacticAnalyzer.analysis(tokens);
+            }catch (IllegalCharException | IllegalTokenException e){
                 e.printStackTrace();
                 Log.e(TAG, e.getMessage());
             }

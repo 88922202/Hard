@@ -1,4 +1,4 @@
-package main.java.com.hard.hardasm;
+package main.java.com.hard.hardasm.utils;
 
 import java.net.URL;
 import java.net.URLDecoder;

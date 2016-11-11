@@ -1,5 +1,7 @@
 package main.java.com.hard.hardasm;
 
+import main.java.com.hard.hardasm.exception.IllegalCharException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class Lexer2 {
     private static final int LEX_STATE_IDENTITIER = 1;
     private static final int LEX_STATE_INT = 2;
 
-    public static List<Token> getLineTokens(String line) throws IllegalTokenException{
+    public static List<Token> getLineTokens(String line) throws IllegalCharException {
 
         int currentLexState = LEX_STATE_NORMAL;
         int tokenStartIndex = 0;
@@ -52,7 +54,7 @@ public class Lexer2 {
                     case LEX_STATE_IDENTITIER:
                         break;
                     case LEX_STATE_INT:
-                        throw new IllegalTokenException("error char " + currentChar);
+                        throw new IllegalCharException("error char " + currentChar);
                     default:
                         break;
                 }

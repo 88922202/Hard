@@ -1,26 +1,17 @@
-package main.java.com.hard.hardasm;
+package main.java.com.hard.hardasm.exception;
 
 /**
  * <h3></h3>
- * Created by root on 2016/11/9.
+ * Created by root on 2016/11/11.
  */
 public class IllegalTokenException extends Exception{
 
-    private int mExceptionType;
+    public static final int TYPE = ExceptionType.ILLEGAL_TOKEN;
 
     private String mMessage;
 
-    public IllegalTokenException(){
-        super();
-    }
-
     public IllegalTokenException(String message) {
-        super(message);
         mMessage = message;
-    }
-
-    public int getExceptionType() {
-        return mExceptionType;
     }
 
     public String getMessage() {

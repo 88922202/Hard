@@ -1,5 +1,7 @@
 package main.java.com.hard.hardasm;
 
+import main.java.com.hard.hardasm.utils.TextUtils;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
