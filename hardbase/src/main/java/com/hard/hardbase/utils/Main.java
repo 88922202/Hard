@@ -1,4 +1,4 @@
-package com.hard.hardutils;
+package com.hard.hardbase.utils;
 
 /**
  * <h3></h3>

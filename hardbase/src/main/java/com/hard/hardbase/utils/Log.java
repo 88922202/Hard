@@ -1,4 +1,4 @@
-package com.hard.hardutils;
+package com.hard.hardbase.utils;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -36,7 +36,7 @@ public class Log {
     }
 
     private static Logger getLogger(){
-        PropertyConfigurator.configure("D:\\me\\8892\\Hard\\HardUtils\\src\\main\\java\\com\\hard\\hardutils\\log4j.properties");
+        PropertyConfigurator.configure("D:\\me\\8892\\Hard\\HardBase\\src\\main\\java\\com\\hard\\hardbase\\utils\\log4j.properties");
         return Logger.getLogger(Log.class);
     }
 }

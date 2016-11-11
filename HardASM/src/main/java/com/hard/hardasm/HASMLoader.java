@@ -1,8 +1,8 @@
 package com.hard.hardasm;
 
 
-import com.hard.hardutils.Log;
-import com.hard.hardutils.TextUtils;
+import com.hard.hardbase.utils.Log;
+import com.hard.hardbase.utils.TextUtils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

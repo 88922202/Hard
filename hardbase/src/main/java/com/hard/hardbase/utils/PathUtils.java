@@ -1,4 +1,4 @@
-package com.hard.hardutils;
+package com.hard.hardbase.utils;
 
 import java.net.URL;
 import java.net.URLDecoder;

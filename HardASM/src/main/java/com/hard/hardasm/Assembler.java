@@ -2,7 +2,7 @@ package com.hard.hardasm;
 
 import com.hard.hardasm.exception.IllegalCharException;
 import com.hard.hardasm.exception.IllegalTokenException;
-import com.hard.hardutils.Log;
+import com.hard.hardbase.utils.Log;
 
 import java.util.List;
 

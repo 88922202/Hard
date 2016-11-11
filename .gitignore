@@ -9,3 +9,6 @@
 /HardVM/.gradle
 /HardVM/build
 /HardASM/.gradle
+/hardbase/.gradle
+/hardbase/.idea
+/hardbase/build

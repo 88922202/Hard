@@ -1,6 +1,6 @@
 package com.hard.hardvm;
 
-import com.hard.hardutils.Log;
+import com.hard.hardbase.utils.Log;
 
 /**
  * <h3></h3>
@@ -8,6 +8,6 @@ import com.hard.hardutils.Log;
  */
 public class Main {
     public static void main(String args[]){
-        Log.d("HardVM", "import HardUtils");
+        Log.d("HardVM", "import HardBase");
     }
 }

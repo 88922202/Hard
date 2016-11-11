@@ -1,6 +1,4 @@
-package com.hard.hardutils;
-
-import com.hard.hardutils.Log;
+package com.hard.hardbase.utils;
 
 import java.io.*;
 
