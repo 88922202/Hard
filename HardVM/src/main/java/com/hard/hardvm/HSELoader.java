@@ -5,6 +5,8 @@ import com.hard.hardbase.utils.FileUtils;
 import com.hard.hardbase.utils.HSEDefinition;
 import com.hard.hardbase.utils.Log;
 
+import static com.hard.hardbase.utils.HSEDefinition.ADD;
+
 /**
  * <h3></h3>
  * Created by root on 2016/11/14.
@@ -22,6 +24,7 @@ public class HSELoader {
         }
 
         loadHSEVersion(file);
+        loadHSEInstructions(file);
     }
 
     private static boolean loadHSEHeader(byte file[]){
@@ -49,5 +52,26 @@ public class HSELoader {
 
         Log.d(TAG, ".xse file version " + version);
         return true;
+    }
+
+    private static void loadHSEInstructions(byte file[]){
+        byte[] bInstruction = new byte[4];
+        System.arraycopy(file, 8, bInstruction, 0, 4);
+        Integer instruction = CharUtils.byte2int(bInstruction);
+        switch (instruction){
+            case ADD:
+                int operand1 = loadIntOperand(file, 12);
+                int operand2 = loadIntOperand(file, 16);
+                Executor.executeAdd(operand1, operand2);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static int loadIntOperand(byte file[], int start){
+        byte[] bInstruction = new byte[4];
+        System.arraycopy(file, start, bInstruction, 0, 4);
+        return CharUtils.byte2int(bInstruction);
     }
 }

@@ -11,4 +11,7 @@ public class HSEDefinition {
 
     //XSE文件的版本号。
     public static final int VERSION = 1;
+
+    //指令，两个操作数相加
+    public static final int ADD = 0;
 }
