@@ -6,26 +6,22 @@ package com.hard.hardbase.utils;
  */
 public class CharUtils {
 
-    // 将byte数组bRefArr转为一个整数,字节数组的低位是整型的低字节位
-    public static int toInt(byte[] bRefArr) {
-        int iOutcome = 0;
-        byte bLoop;
-
-        for (int i = 0; i < bRefArr.length; i++) {
-            bLoop = bRefArr[i];
-            iOutcome += (bLoop & 0xFF) << (8 * i);
-        }
-        return iOutcome;
-    }
-
+    /**
+     * 把byte数组转换成为int
+     * @param res 待转换的byte数组
+     * @return int 转换后的int数字
+     */
     public static int byte2int(byte[] res) {
-// 一个byte数据左移24位变成0x??000000，再右移8位变成0x00??0000
-
-        int targets = (res[0] & 0xff) | ((res[1] << 8) & 0xff00) // | 表示安位或
+        // 一个byte数据左移24位变成0x??000000，再右移8位变成0x00??0000
+        return  (res[0] & 0xff) | ((res[1] << 8) & 0xff00) // | 表示按位或
                 | ((res[2] << 24) >>> 8) | (res[3] << 24);
-        return targets;
     }
 
+    /**
+     * 把int转换成byte[]
+     * @param res 待转换的数字
+     * @return byte[] 转换后的数组
+     */
     public static byte[] int2byte(int res) {
         byte[] targets = new byte[4];
 

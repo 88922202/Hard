@@ -1,6 +1,5 @@
 package com.hard.hardvm;
 
-import com.hard.hardbase.utils.FileUtils;
 import com.hard.hardbase.utils.Log;
 
 /**
@@ -11,6 +10,6 @@ public class Main {
     public static void main(String args[]){
         Log.d("HardVM", "HardVM started.");
 
-        HSELoader.loadHSEFile("D:\\me\\8892\\Hard\\HardVM\\build\\classes\\main\\com\\hard\\hardvm\\first.hse");
+        HSELoader.loadHSEFile("D:\\me\\8892\\Hard\\HardASM\\first.hse");
     }
 }
