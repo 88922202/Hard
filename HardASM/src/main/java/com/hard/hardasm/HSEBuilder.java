@@ -1,6 +1,7 @@
 package com.hard.hardasm;
 
 
+import com.hard.hardbase.utils.CharUtils;
 import com.hard.hardbase.utils.FileUtils;
 
 import java.util.List;
@@ -14,12 +15,12 @@ public class HSEBuilder {
     public static void buildHSEFile(){
         String fileName = "first.hse";
         String magicNumber = "HASM";
-        FileUtils.appendBytes(fileName, magicNumber);
-        float version = 0.1f;
-        FileUtils.appendFloat(fileName, version);
+        FileUtils.writeBytes(fileName, magicNumber);
+        int version = 1;
+        FileUtils.appendBytes(fileName, new String(CharUtils.int2byte(version)));
         List<Integer> instructions = Assembler.getInstructions();
         for (int i = 0; i < instructions.size(); i++){
-            FileUtils.appendInt(fileName, instructions.get(i));
+            FileUtils.appendBytes(fileName, new String(CharUtils.int2byte(instructions.get(i))));
         }
     }
 }
