@@ -23,12 +23,12 @@ public class SyntacticAnalyzer {
             int nextTokenType = getNextTokenType(tokens, i + 1);
 
             switch (currentToken.getTokenType()){
-                case Token.TOKEN_TYPE_IDENT:
+                case HSEDefinition.TOKEN_TYPE_IDENT:
                     switch (currentValue){
                         case HSEDefinition.ADD:
-                            if (nextTokenType == Token.TOKEN_TYPE_INT || nextTokenType == Token.TOKEN_TYPE_FLOAT){
+                            if (nextTokenType == HSEDefinition.TOKEN_TYPE_INT || nextTokenType == HSEDefinition.TOKEN_TYPE_FLOAT){
                                 int next2TokenType = getNextTokenType(tokens, i + 2);
-                                if (next2TokenType == Token.TOKEN_TYPE_INT || next2TokenType == Token.TOKEN_TYPE_FLOAT){
+                                if (next2TokenType == HSEDefinition.TOKEN_TYPE_INT || next2TokenType == HSEDefinition.TOKEN_TYPE_FLOAT){
                                     int code = HSEDefinition.getInstructionCode(HSEDefinition.ADD);
                                     codes.add(code);
                                     Log.d(TAG, "instruction code is " + code);
@@ -40,9 +40,9 @@ public class SyntacticAnalyzer {
                             }
                             break;
                         case HSEDefinition.SUB:
-                            if (nextTokenType == Token.TOKEN_TYPE_INT || nextTokenType == Token.TOKEN_TYPE_FLOAT){
+                            if (nextTokenType == HSEDefinition.TOKEN_TYPE_INT || nextTokenType == HSEDefinition.TOKEN_TYPE_FLOAT){
                                 int next2TokenType = getNextTokenType(tokens, i + 2);
-                                if (next2TokenType == Token.TOKEN_TYPE_INT || next2TokenType == Token.TOKEN_TYPE_FLOAT){
+                                if (next2TokenType == HSEDefinition.TOKEN_TYPE_INT || next2TokenType == HSEDefinition.TOKEN_TYPE_FLOAT){
                                     int code = HSEDefinition.getInstructionCode(HSEDefinition.SUB);
                                     codes.add(code);
                                     Log.d(TAG, "instruction code is " + code);
@@ -52,9 +52,9 @@ public class SyntacticAnalyzer {
                             }
                             break;
                         case HSEDefinition.MUL:
-                            if (nextTokenType == Token.TOKEN_TYPE_INT || nextTokenType == Token.TOKEN_TYPE_FLOAT){
+                            if (nextTokenType == HSEDefinition.TOKEN_TYPE_INT || nextTokenType == HSEDefinition.TOKEN_TYPE_FLOAT){
                                 int next2TokenType = getNextTokenType(tokens, i + 2);
-                                if (next2TokenType == Token.TOKEN_TYPE_INT || next2TokenType == Token.TOKEN_TYPE_FLOAT){
+                                if (next2TokenType == HSEDefinition.TOKEN_TYPE_INT || next2TokenType == HSEDefinition.TOKEN_TYPE_FLOAT){
                                     int code = HSEDefinition.getInstructionCode(HSEDefinition.MUL);
                                     codes.add(code);
                                     Log.d(TAG, "instruction code is " + code);
@@ -64,9 +64,9 @@ public class SyntacticAnalyzer {
                             }
                             break;
                         case HSEDefinition.DIV:
-                            if (nextTokenType == Token.TOKEN_TYPE_INT || nextTokenType == Token.TOKEN_TYPE_FLOAT){
+                            if (nextTokenType == HSEDefinition.TOKEN_TYPE_INT || nextTokenType == HSEDefinition.TOKEN_TYPE_FLOAT){
                                 int next2TokenType = getNextTokenType(tokens, i + 2);
-                                if (next2TokenType == Token.TOKEN_TYPE_INT || next2TokenType == Token.TOKEN_TYPE_FLOAT){
+                                if (next2TokenType == HSEDefinition.TOKEN_TYPE_INT || next2TokenType == HSEDefinition.TOKEN_TYPE_FLOAT){
                                     int code = HSEDefinition.getInstructionCode(HSEDefinition.DIV);
                                     codes.add(code);
                                     Log.d(TAG, "instruction code is " + code);
@@ -79,9 +79,9 @@ public class SyntacticAnalyzer {
                             break;
                     }
                     break;
-                case Token.TOKEN_TYPE_INT:
+                case HSEDefinition.TOKEN_TYPE_INT:
                     try {
-                        int type = Token.TOKEN_TYPE_INT;
+                        int type = HSEDefinition.TOKEN_TYPE_INT;
                         codes.add(type);
                         int number = Integer.parseInt(currentValue);
                         codes.add(number);
@@ -91,9 +91,9 @@ public class SyntacticAnalyzer {
                     }
 
                     break;
-                case Token.TOKEN_TYPE_FLOAT:
+                case HSEDefinition.TOKEN_TYPE_FLOAT:
                     try {
-                        int type = Token.TOKEN_TYPE_FLOAT;
+                        int type = HSEDefinition.TOKEN_TYPE_FLOAT;
                         codes.add(type);
                         float number = Float.parseFloat(currentValue);
                         codes.add(number);
@@ -113,7 +113,7 @@ public class SyntacticAnalyzer {
 
     private static int getNextTokenType(List<Token> tokens, int index){
         if (index > tokens.size() - 1){
-            return Token.END_OF_TOKEN_STREAM;
+            return HSEDefinition.END_OF_TOKEN_STREAM;
         }
 
         return tokens.get(index).getTokenType();

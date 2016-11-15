@@ -22,11 +22,11 @@ public class HSEBuilder {
 
         //写入文件的版本号
         int version = 1;
-        FileUtils.appendBytes(fileName, new String(CharUtils.int2byte(version)));
+        FileUtils.appendBytes(fileName, CharUtils.int2byte(version));
 
         //写入指令区长度
         List<Object> instructions = Assembler.getInstructions();
-        FileUtils.appendBytes(fileName, new String(CharUtils.int2byte(instructions.size())));
+        FileUtils.appendBytes(fileName, CharUtils.int2byte(instructions.size()));
 
         int i = 0;
         while (i < instructions.size()){
@@ -52,35 +52,33 @@ public class HSEBuilder {
     private static int appendInstructions(String fileName, List instructions, int start){
         int instruction = (int) instructions.get(start);
         //写命令
-        FileUtils.appendBytes(fileName, new String(CharUtils.int2byte(instruction)));
+        FileUtils.appendBytes(fileName, CharUtils.int2byte(instruction));
         start++;
         int type1 = (int) instructions.get(start);
         //写操作数类型
-        FileUtils.appendBytes(fileName, new String(CharUtils.int2byte(type1)));
+        FileUtils.appendBytes(fileName, CharUtils.int2byte(type1));
         //写操作数值
         start++;
         if (type1 == HSEDefinition.TOKEN_TYPE_INT){
-            FileUtils.appendBytes(fileName, new String(CharUtils.int2byte((int) instructions.get(start))));
+            FileUtils.appendBytes(fileName, CharUtils.int2byte((int) instructions.get(start)));
         }else if (type1 == HSEDefinition.TOKEN_TYPE_FLOAT){
-            FileUtils.appendBytes(fileName, new String(CharUtils.float2byte((float) instructions.get(start))));
+            FileUtils.appendBytes(fileName, CharUtils.float2byte((float) instructions.get(start)));
         }else {
 
         }
         start++;
         int type2 = (int) instructions.get(start);
         //写操作数类型
-        FileUtils.appendBytes(fileName, new String(CharUtils.int2byte(type2)));
+        FileUtils.appendBytes(fileName, CharUtils.int2byte(type2));
         //写操作数值
         start++;
         if (type2 == HSEDefinition.TOKEN_TYPE_INT){
-            FileUtils.appendBytes(fileName, new String(CharUtils.int2byte((int) instructions.get(start))));
+            FileUtils.appendBytes(fileName, CharUtils.int2byte((int) instructions.get(start)));
         }else if (type2 == HSEDefinition.TOKEN_TYPE_FLOAT){
-            FileUtils.appendBytes(fileName, new String(CharUtils.float2byte((float) instructions.get(start))));
+            FileUtils.appendBytes(fileName, CharUtils.float2byte((float) instructions.get(start)));
         }else {
 
         }
-
-       // start++;
 
         return ++start;
     }
