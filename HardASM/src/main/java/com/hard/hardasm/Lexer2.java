@@ -1,6 +1,7 @@
 package com.hard.hardasm;
 
 import com.hard.hardasm.exception.IllegalCharException;
+import com.hard.hardbase.utils.HSEDefinition;
 import com.hard.hardbase.utils.Log;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class Lexer2 {
     private static final int LEX_STATE_NORMAL = 0;
     private static final int LEX_STATE_IDENTITIER = 1;
     private static final int LEX_STATE_INT = 2;
+    private static final int LEX_STATE_FLOAT = 3;
 
     public static List<Token> getLineTokens(String line) throws IllegalCharException {
 
@@ -40,6 +42,8 @@ public class Lexer2 {
                         break;
                     case LEX_STATE_INT:
                         break;
+                    case LEX_STATE_FLOAT:
+                        break;
                     default:
                         break;
                 }
@@ -54,10 +58,8 @@ public class Lexer2 {
                         break;
                     case LEX_STATE_IDENTITIER:
                         break;
-                    case LEX_STATE_INT:
-                        throw new IllegalCharException("error char " + currentChar);
                     default:
-                        break;
+                        throw new IllegalCharException("error char " + currentChar);
                 }
             }
 
@@ -68,14 +70,21 @@ public class Lexer2 {
                     }
                     if (currentLexState == LEX_STATE_IDENTITIER){
                         String strToken = line.substring(tokenStartIndex, i);
-                        Token token = new Token(Token.TOKEN_TYPE_IDENT, strToken);
+                        Token token = new Token(HSEDefinition.TOKEN_TYPE_IDENT, strToken);
                         tokens.add(token);
                         tokenStartIndex = i;
                         currentLexState = LEX_STATE_NORMAL;
                     }
                     if (currentLexState == LEX_STATE_INT){
                         String strToken = line.substring(tokenStartIndex, i);
-                        Token token = new Token(Token.TOKEN_TYPE_INT, strToken);
+                        Token token = new Token(HSEDefinition.TOKEN_TYPE_INT, strToken);
+                        tokens.add(token);
+                        tokenStartIndex = i;
+                        currentLexState = LEX_STATE_NORMAL;
+                    }
+                    if (currentLexState == LEX_STATE_FLOAT){
+                        String strToken = line.substring(tokenStartIndex, i);
+                        Token token = new Token(HSEDefinition.TOKEN_TYPE_FLOAT, strToken);
                         tokens.add(token);
                         tokenStartIndex = i;
                         currentLexState = LEX_STATE_NORMAL;
@@ -87,16 +96,35 @@ public class Lexer2 {
                     }
                     if (currentLexState == LEX_STATE_IDENTITIER){
                         String strToken = line.substring(tokenStartIndex, i);
-                        Token token = new Token(Token.TOKEN_TYPE_IDENT, strToken);
+                        Token token = new Token(HSEDefinition.TOKEN_TYPE_IDENT, strToken);
                         tokens.add(token);
                         return tokens;
                     }
                     if (currentLexState == LEX_STATE_INT){
                         String strToken = line.substring(tokenStartIndex, i);
-                        Token token = new Token(Token.TOKEN_TYPE_INT, strToken);
+                        Token token = new Token(HSEDefinition.TOKEN_TYPE_INT, strToken);
                         tokens.add(token);
                         return tokens;
                     }
+                    if (currentLexState == LEX_STATE_FLOAT){
+                        String strToken = line.substring(tokenStartIndex, i);
+                        Token token = new Token(HSEDefinition.TOKEN_TYPE_FLOAT, strToken);
+                        tokens.add(token);
+                        return tokens;
+                    }
+                    break;
+                case '.':
+                    switch (currentLexState){
+                        case LEX_STATE_NORMAL:
+                            currentLexState = LEX_STATE_FLOAT;
+                            break;
+                        case LEX_STATE_INT:
+                            currentLexState = LEX_STATE_FLOAT;
+                            break;
+                        default:
+                            throw new IllegalCharException("error char '.' ");
+                    }
+
                     break;
                 default:
                     break;

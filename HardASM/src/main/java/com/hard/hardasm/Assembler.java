@@ -15,9 +15,9 @@ public class Assembler {
 
     private static final String TAG = "Assembler";
 
-    public static List<Integer> getInstructions(){
+    public static List<Object> getInstructions(){
         List<String> lines = HASMLoader.loadHASMSourceFile("D:\\me\\8892\\Hard\\HardASM\\src\\main\\java\\com\\hard\\hardasm\\test_0.xasm");
-        List<Integer> codes = new ArrayList<>();
+        List<Object> codes = new ArrayList<>();
 
         for (int i = 0; i < lines.size(); i++){
             Log.d(TAG, "line " + i + ": " + lines.get(i));

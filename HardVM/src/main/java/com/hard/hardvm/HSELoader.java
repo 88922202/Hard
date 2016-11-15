@@ -27,7 +27,12 @@ public class HSELoader {
         loadHSEVersion(file);
         int length = loadHSEInstructionsLength(file);
         while (mInstructionStartIndex < length * 4 + 12){
-            loadHSEInstructions(file);
+            try {
+                loadHSEInstructions(file);
+            }catch (IllegalInstructionException e){
+                e.printStackTrace();
+                Log.e(TAG, e.getMessage());
+            }
         }
     }
 
@@ -66,41 +71,89 @@ public class HSELoader {
         return length;
     }
 
-    private static void loadHSEInstructions(byte file[]){
+    private static void loadHSEInstructions(byte file[]) throws IllegalInstructionException{
         byte[] bInstruction = new byte[4];
         System.arraycopy(file, mInstructionStartIndex, bInstruction, 0, 4);
         Integer instruction = CharUtils.byte2int(bInstruction);
         switch (instruction){
             case HSEDefinition.ADD_CODE: {
-                int operand1 = loadIntOperand(file, mInstructionStartIndex + 4);
-                int operand2 = loadIntOperand(file, mInstructionStartIndex + 8);
-                mInstructionStartIndex += 12;
-                Executor.executeAdd(operand1, operand2);
+                int type1 = loadIntOperand(file, mInstructionStartIndex + 4);
+                Object operand1;
+                if (type1 == HSEDefinition.TOKEN_TYPE_INT) {
+                    operand1 = loadIntOperand(file, mInstructionStartIndex + 8);
+                }else{
+                    operand1 = loadFloatOperand(file, mInstructionStartIndex + 8);
+                }
+                int type2 = loadIntOperand(file, mInstructionStartIndex + 12);
+                Object operand2;
+                if (type2 == HSEDefinition.TOKEN_TYPE_INT) {
+                    operand2 = loadIntOperand(file, mInstructionStartIndex + 16);
+                }else{
+                    operand2 = loadFloatOperand(file, mInstructionStartIndex + 16);
+                }
+                mInstructionStartIndex += 20;
+                Executor.executeAdd(type1, operand1, type2, operand2);
             }
                 break;
             case HSEDefinition.SUB_CODE: {
-                int operand1 = loadIntOperand(file, mInstructionStartIndex + 4);
-                int operand2 = loadIntOperand(file, mInstructionStartIndex + 8);
-                mInstructionStartIndex += 12;
-                Executor.executeSub(operand1, operand2);
+                int type1 = loadIntOperand(file, mInstructionStartIndex + 4);
+                Object operand1;
+                if (type1 == HSEDefinition.TOKEN_TYPE_INT) {
+                    operand1 = loadIntOperand(file, mInstructionStartIndex + 8);
+                }else{
+                    operand1 = loadFloatOperand(file, mInstructionStartIndex + 8);
+                }
+                int type2 = loadIntOperand(file, mInstructionStartIndex + 12);
+                Object operand2;
+                if (type2 == HSEDefinition.TOKEN_TYPE_INT) {
+                    operand2 = loadIntOperand(file, mInstructionStartIndex + 16);
+                }else{
+                    operand2 = loadFloatOperand(file, mInstructionStartIndex + 16);
+                }
+                mInstructionStartIndex += 20;
+                Executor.executeSub(type1, operand1, type2, operand2);
             }
                 break;
             case HSEDefinition.MUL_CODE: {
-                int operand1 = loadIntOperand(file, mInstructionStartIndex + 4);
-                int operand2 = loadIntOperand(file, mInstructionStartIndex + 8);
-                mInstructionStartIndex += 12;
-                Executor.executeMul(operand1, operand2);
+                int type1 = loadIntOperand(file, mInstructionStartIndex + 4);
+                Object operand1;
+                if (type1 == HSEDefinition.TOKEN_TYPE_INT) {
+                    operand1 = loadIntOperand(file, mInstructionStartIndex + 8);
+                }else{
+                    operand1 = loadFloatOperand(file, mInstructionStartIndex + 8);
+                }
+                int type2 = loadIntOperand(file, mInstructionStartIndex + 12);
+                Object operand2;
+                if (type2 == HSEDefinition.TOKEN_TYPE_INT) {
+                    operand2 = loadIntOperand(file, mInstructionStartIndex + 16);
+                }else{
+                    operand2 = loadFloatOperand(file, mInstructionStartIndex + 16);
+                }
+                mInstructionStartIndex += 20;
+                Executor.executeMul(type1, operand1, type2, operand2);
             }
                 break;
             case HSEDefinition.DIV_CODE: {
-                int operand1 = loadIntOperand(file, mInstructionStartIndex + 4);
-                int operand2 = loadIntOperand(file, mInstructionStartIndex + 8);
-                mInstructionStartIndex += 12;
-                Executor.executeDiv(operand1, operand2);
+                int type1 = loadIntOperand(file, mInstructionStartIndex + 4);
+                Object operand1;
+                if (type1 == HSEDefinition.TOKEN_TYPE_INT) {
+                    operand1 = loadIntOperand(file, mInstructionStartIndex + 8);
+                }else{
+                    operand1 = loadFloatOperand(file, mInstructionStartIndex + 8);
+                }
+                int type2 = loadIntOperand(file, mInstructionStartIndex + 12);
+                Object operand2;
+                if (type2 == HSEDefinition.TOKEN_TYPE_INT) {
+                    operand2 = loadIntOperand(file, mInstructionStartIndex + 16);
+                }else{
+                    operand2 = loadFloatOperand(file, mInstructionStartIndex + 16);
+                }
+                mInstructionStartIndex += 20;
+                Executor.executeDiv(type1, operand1, type2, operand2);
             }
                 break;
             default:
-                break;
+                throw new IllegalInstructionException("Invalid instruction " + instruction);
         }
     }
 
@@ -108,5 +161,27 @@ public class HSELoader {
         byte[] bInstruction = new byte[4];
         System.arraycopy(file, start, bInstruction, 0, 4);
         return CharUtils.byte2int(bInstruction);
+    }
+
+    private static float loadFloatOperand(byte file[], int start){
+        byte[] fInstruction = new byte[4];
+        System.arraycopy(file, start, fInstruction, 0, 4);
+        return CharUtils.byte2float(fInstruction, 0);
+    }
+
+    private static void loadOperands(byte file[]){
+        int type1 = loadIntOperand(file, mInstructionStartIndex + 4);
+        if (type1 == HSEDefinition.TOKEN_TYPE_INT) {
+            int operand1 = loadIntOperand(file, mInstructionStartIndex + 8);
+        }else if (type1 == HSEDefinition.TOKEN_TYPE_FLOAT){
+            float operand1 = loadFloatOperand(file, mInstructionStartIndex + 8);
+        }
+        int type2 = loadIntOperand(file, mInstructionStartIndex + 12);
+        if (type2 == HSEDefinition.TOKEN_TYPE_INT) {
+            int operand2 = loadIntOperand(file, mInstructionStartIndex + 16);
+        }else if (type1 == HSEDefinition.TOKEN_TYPE_FLOAT){
+            float operand2 = loadFloatOperand(file, mInstructionStartIndex + 16);
+        }
+        mInstructionStartIndex += 16;
     }
 }
