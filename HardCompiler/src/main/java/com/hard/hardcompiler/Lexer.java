@@ -157,14 +157,14 @@ public class Lexer {
                         throw new IllegalCharException("error char '*' ");
                     }
                     break;
-                case '\\':
+                case '/':
                     if (currentLexState == STATE_NORMAL){
                         String strToken = line.substring(i, i + 1);
                         Token token = new Token(Token.DIV, strToken);
                         tokens.add(token);
                         tokenStartIndex = i;
                     }else {
-                        throw new IllegalCharException("error char '\\' ");
+                        throw new IllegalCharException("error char '/' ");
                     }
                     break;
                 case '(':
