@@ -1,6 +1,7 @@
 package com.hard.hardasm;
 
 import com.hard.hardasm.exception.IllegalTokenException;
+import com.hard.hardbase.utils.HSEDefinition;
 import com.hard.hardbase.utils.Log;
 
 import java.util.ArrayList;
@@ -24,11 +25,11 @@ public class SyntacticAnalyzer {
             switch (currentToken.getTokenType()){
                 case Token.TOKEN_TYPE_IDENT:
                     switch (currentValue){
-                        case Instruction.ADD:
+                        case HSEDefinition.ADD:
                             if (nextTokenType == Token.TOKEN_TYPE_INT){
                                 int next2TokenType = getNextTokenType(tokens, i + 2);
                                 if (next2TokenType == Token.TOKEN_TYPE_INT){
-                                    int code = Instruction.getInstructionCode(Instruction.ADD);
+                                    int code = HSEDefinition.getInstructionCode(HSEDefinition.ADD);
                                     //i = skipParsedTokens(i, 2);
                                     codes.add(code);
                                     Log.d(TAG, "instruction code is " + code);
@@ -37,6 +38,19 @@ public class SyntacticAnalyzer {
                                 }
                             }else {
                                 throw new IllegalTokenException("error token " + nextTokenType);
+                            }
+                            break;
+                        case HSEDefinition.SUB:
+                            if (nextTokenType == Token.TOKEN_TYPE_INT){
+                                int next2TokenType = getNextTokenType(tokens, i + 2);
+                                if (next2TokenType == Token.TOKEN_TYPE_INT){
+                                    int code = HSEDefinition.getInstructionCode(HSEDefinition.SUB);
+                                    //i = skipParsedTokens(i, 2);
+                                    codes.add(code);
+                                    Log.d(TAG, "instruction code is " + code);
+                                }else {
+                                    throw new IllegalTokenException("error token " + next2TokenType);
+                                }
                             }
                             break;
                         default:

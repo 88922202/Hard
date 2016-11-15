@@ -5,7 +5,8 @@ import com.hard.hardbase.utils.FileUtils;
 import com.hard.hardbase.utils.HSEDefinition;
 import com.hard.hardbase.utils.Log;
 
-import static com.hard.hardbase.utils.HSEDefinition.ADD;
+import static com.hard.hardbase.utils.HSEDefinition.ADD_CODE;
+import static com.hard.hardbase.utils.HSEDefinition.SUB_CODE;
 
 /**
  * <h3></h3>
@@ -17,6 +18,8 @@ public class HSELoader {
 
     private static final int HARDVM_VERSION = 1;
 
+    private static int mInstructionStartIndex = 12;
+
     public static void loadHSEFile(String fileName){
         byte file[] = FileUtils.readFileByByte(fileName, 1024);
         if (!loadHSEHeader(file)){
@@ -24,7 +27,10 @@ public class HSELoader {
         }
 
         loadHSEVersion(file);
-        loadHSEInstructions(file);
+        int length = loadHSEInstructionsLength(file);
+        while (mInstructionStartIndex < length * 4 + 12){
+            loadHSEInstructions(file);
+        }
     }
 
     private static boolean loadHSEHeader(byte file[]){
@@ -54,16 +60,32 @@ public class HSELoader {
         return true;
     }
 
+    private static int loadHSEInstructionsLength(byte file[]){
+        byte[] bLength = new byte[4];
+        System.arraycopy(file, 8, bLength, 0, 4);
+        Integer length = CharUtils.byte2int(bLength);
+        Log.d(TAG, "total instructions length " + length);
+        return length;
+    }
+
     private static void loadHSEInstructions(byte file[]){
         byte[] bInstruction = new byte[4];
-        System.arraycopy(file, 8, bInstruction, 0, 4);
+        System.arraycopy(file, mInstructionStartIndex, bInstruction, 0, 4);
         Integer instruction = CharUtils.byte2int(bInstruction);
         switch (instruction){
-            case ADD:
-                int operand1 = loadIntOperand(file, 12);
-                int operand2 = loadIntOperand(file, 16);
+            case ADD_CODE: {
+                int operand1 = loadIntOperand(file, mInstructionStartIndex + 4);
+                int operand2 = loadIntOperand(file, mInstructionStartIndex + 8);
+                mInstructionStartIndex += 12;
                 Executor.executeAdd(operand1, operand2);
+            }
                 break;
+            case SUB_CODE: {
+                int operand1 = loadIntOperand(file, mInstructionStartIndex + 4);
+                int operand2 = loadIntOperand(file, mInstructionStartIndex + 8);
+                mInstructionStartIndex += 12;
+                Executor.executeSub(operand1, operand2);
+            }
             default:
                 break;
         }

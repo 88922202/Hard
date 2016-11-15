@@ -4,6 +4,7 @@ import com.hard.hardasm.exception.IllegalCharException;
 import com.hard.hardasm.exception.IllegalTokenException;
 import com.hard.hardbase.utils.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +17,8 @@ public class Assembler {
 
     public static List<Integer> getInstructions(){
         List<String> lines = HASMLoader.loadHASMSourceFile("D:\\me\\8892\\Hard\\HardASM\\src\\main\\java\\com\\hard\\hardasm\\test_0.xasm");
+        List<Integer> codes = new ArrayList<>();
+
         for (int i = 0; i < lines.size(); i++){
             Log.d(TAG, "line " + i + ": " + lines.get(i));
             try {
@@ -23,7 +26,7 @@ public class Assembler {
                 for (int j = 0; j < tokens.size(); j++){
                     Log.d(TAG, "token is " + tokens.get(j).getValue());
                 }
-                return SyntacticAnalyzer.analysis(tokens);
+                codes.addAll(SyntacticAnalyzer.analysis(tokens));
             }catch (IllegalCharException | IllegalTokenException e){
                 e.printStackTrace();
                 Log.e(TAG, e.getMessage());
@@ -31,6 +34,6 @@ public class Assembler {
 
         }
 
-        return null;
+        return codes;
     }
 }

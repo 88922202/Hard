@@ -9,4 +9,8 @@ public class Executor {
     public static void executeAdd(int operand1, int operand2){
         System.out.println(operand1 + operand2);
     }
+
+    public static void executeSub(int operand1, int operand2){
+        System.out.println(operand1 - operand2);
+    }
 }
