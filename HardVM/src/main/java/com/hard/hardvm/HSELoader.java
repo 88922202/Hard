@@ -5,8 +5,6 @@ import com.hard.hardbase.utils.FileUtils;
 import com.hard.hardbase.utils.HSEDefinition;
 import com.hard.hardbase.utils.Log;
 
-import static com.hard.hardbase.utils.HSEDefinition.ADD_CODE;
-import static com.hard.hardbase.utils.HSEDefinition.SUB_CODE;
 
 /**
  * <h3></h3>
@@ -73,19 +71,34 @@ public class HSELoader {
         System.arraycopy(file, mInstructionStartIndex, bInstruction, 0, 4);
         Integer instruction = CharUtils.byte2int(bInstruction);
         switch (instruction){
-            case ADD_CODE: {
+            case HSEDefinition.ADD_CODE: {
                 int operand1 = loadIntOperand(file, mInstructionStartIndex + 4);
                 int operand2 = loadIntOperand(file, mInstructionStartIndex + 8);
                 mInstructionStartIndex += 12;
                 Executor.executeAdd(operand1, operand2);
             }
                 break;
-            case SUB_CODE: {
+            case HSEDefinition.SUB_CODE: {
                 int operand1 = loadIntOperand(file, mInstructionStartIndex + 4);
                 int operand2 = loadIntOperand(file, mInstructionStartIndex + 8);
                 mInstructionStartIndex += 12;
                 Executor.executeSub(operand1, operand2);
             }
+                break;
+            case HSEDefinition.MUL_CODE: {
+                int operand1 = loadIntOperand(file, mInstructionStartIndex + 4);
+                int operand2 = loadIntOperand(file, mInstructionStartIndex + 8);
+                mInstructionStartIndex += 12;
+                Executor.executeMul(operand1, operand2);
+            }
+                break;
+            case HSEDefinition.DIV_CODE: {
+                int operand1 = loadIntOperand(file, mInstructionStartIndex + 4);
+                int operand2 = loadIntOperand(file, mInstructionStartIndex + 8);
+                mInstructionStartIndex += 12;
+                Executor.executeDiv(operand1, operand2);
+            }
+                break;
             default:
                 break;
         }

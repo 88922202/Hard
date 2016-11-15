@@ -30,7 +30,6 @@ public class SyntacticAnalyzer {
                                 int next2TokenType = getNextTokenType(tokens, i + 2);
                                 if (next2TokenType == Token.TOKEN_TYPE_INT){
                                     int code = HSEDefinition.getInstructionCode(HSEDefinition.ADD);
-                                    //i = skipParsedTokens(i, 2);
                                     codes.add(code);
                                     Log.d(TAG, "instruction code is " + code);
                                 }else {
@@ -45,7 +44,30 @@ public class SyntacticAnalyzer {
                                 int next2TokenType = getNextTokenType(tokens, i + 2);
                                 if (next2TokenType == Token.TOKEN_TYPE_INT){
                                     int code = HSEDefinition.getInstructionCode(HSEDefinition.SUB);
-                                    //i = skipParsedTokens(i, 2);
+                                    codes.add(code);
+                                    Log.d(TAG, "instruction code is " + code);
+                                }else {
+                                    throw new IllegalTokenException("error token " + next2TokenType);
+                                }
+                            }
+                            break;
+                        case HSEDefinition.MUL:
+                            if (nextTokenType == Token.TOKEN_TYPE_INT){
+                                int next2TokenType = getNextTokenType(tokens, i + 2);
+                                if (next2TokenType == Token.TOKEN_TYPE_INT){
+                                    int code = HSEDefinition.getInstructionCode(HSEDefinition.MUL);
+                                    codes.add(code);
+                                    Log.d(TAG, "instruction code is " + code);
+                                }else {
+                                    throw new IllegalTokenException("error token " + next2TokenType);
+                                }
+                            }
+                            break;
+                        case HSEDefinition.DIV:
+                            if (nextTokenType == Token.TOKEN_TYPE_INT){
+                                int next2TokenType = getNextTokenType(tokens, i + 2);
+                                if (next2TokenType == Token.TOKEN_TYPE_INT){
+                                    int code = HSEDefinition.getInstructionCode(HSEDefinition.DIV);
                                     codes.add(code);
                                     Log.d(TAG, "instruction code is " + code);
                                 }else {

@@ -23,6 +23,14 @@ public class HSEDefinition {
     public static final String SUB = "SUB";
     public static final int SUB_CODE = 1;
 
+    //两个操作数相乘
+    public static final String MUL = "MUL";
+    public static final int MUL_CODE = 2;
+
+    //两个操作数相除
+    public static final String DIV = "DIV";
+    public static final int DIV_CODE = 3;
+
 
     private static Map<String, Integer> INSTRUCTION_MAP = initInstructionMap();
 
@@ -34,6 +42,8 @@ public class HSEDefinition {
         Map<String, Integer> map = new HashMap<>();
         map.put(ADD, ADD_CODE);
         map.put(SUB, SUB_CODE);
+        map.put(MUL, MUL_CODE);
+        map.put(DIV, DIV_CODE);
         return map;
     }
 }
