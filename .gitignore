@@ -12,3 +12,6 @@
 /hardbase/.gradle
 /hardbase/.idea
 /hardbase/build
+/HardCompiler/.gradle
+/HardCompiler/.idea
+/HardCompiler/build
