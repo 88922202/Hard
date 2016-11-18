@@ -6,6 +6,7 @@ package com.hard.hardcompiler;
  */
 public class Token {
 
+    public static final int END = -1;
     public static final int INT = 0;
     public static final int FLOAT = 1;
     public static final int ADD = 2;
